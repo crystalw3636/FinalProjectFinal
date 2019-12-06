@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Intro">
+
+    <TextView
+        android:id="@+id/IntroTitle"
+        android:layout_width="354dp"
+        android:layout_height="93dp"
+        android:layout_marginTop="116dp"
+        android:text="Tip Calculator"
+        android:textColor="#3755BB"
+        android:textSize="56sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.491"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0" />
+
+    <TextView
+        android:id="@+id/DescripScan"
+        android:layout_width="318dp"
+        android:layout_height="53dp"
+        android:layout_marginTop="160dp"
+        android:text="Click to scan your receipt"
+        android:textColor="@color/colorAccent"
+        android:textSize="28sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.496"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/IntroTitle"
+        app:layout_constraintVertical_bias="0.039" />
+
+    <Button
+        android:id="@+id/ScanButton"
+        android:layout_width="107dp"
+        android:layout_height="75dp"
+        android:background="#C9FF9800"
+        android:text="Scan "
+        android:textColor="#16255A"
+        android:textSize="24sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/DescripScan"
+        app:layout_constraintVertical_bias="0.189" />
+</androidx.constraintlayout.widget.ConstraintLayout>

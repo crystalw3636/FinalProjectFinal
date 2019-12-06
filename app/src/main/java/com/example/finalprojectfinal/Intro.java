@@ -7,18 +7,21 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 
-public class MainActivity extends AppCompatActivity {
+public class Intro extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
-        Button custom = (Button)findViewById(R.id.button7);
-        custom.setOnClickListener(new View.OnClickListener() {
+        setContentView(R.layout.activity_intro);
+        final Intent intent = new Intent("android.media.action.IMAGE_CAPTURE");
+        startActivity(intent);
+        Button scanButton = findViewById(R.id.ScanButton);
+        scanButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(MainActivity.this, CustomPercent.class));
+                startActivity(intent);
             }
         });
+
     }
 }
