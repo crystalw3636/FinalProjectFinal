@@ -72,7 +72,7 @@
         android:layout_marginStart="80dp"
         android:layout_marginLeft="80dp"
         android:layout_marginTop="48dp"
-        android:text="Button"
+        android:text="15%"
         app:layout_constraintEnd_toStartOf="@+id/textView11"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
@@ -157,27 +157,27 @@
         app:layout_constraintStart_toEndOf="@+id/textView14" />
 
     <Button
-        android:id="@+id/button2"
+        android:id="@+id/percent_18"
         android:layout_width="wrap_content"
         android:layout_height="52sp"
         android:layout_marginStart="80dp"
         android:layout_marginLeft="80dp"
         android:layout_marginTop="46dp"
-        android:text="Button"
+        android:text="18%"
         app:layout_constraintEnd_toStartOf="@+id/textView12"
         app:layout_constraintHorizontal_bias="0.042"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/button" />
 
     <Button
-        android:id="@+id/button3"
+        android:id="@+id/percent_20"
         android:layout_width="wrap_content"
         android:layout_height="52sp"
         android:layout_marginStart="80dp"
         android:layout_marginLeft="80dp"
         android:layout_marginTop="46dp"
         android:layout_marginBottom="45dp"
-        android:text="Button"
+        android:text="20%"
         app:layout_constraintBottom_toTopOf="@+id/button7"
         app:layout_constraintEnd_toStartOf="@+id/textView13"
         app:layout_constraintHorizontal_bias="0.0"
