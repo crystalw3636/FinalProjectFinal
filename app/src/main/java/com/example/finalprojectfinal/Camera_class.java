@@ -79,7 +79,7 @@ public class Camera_class extends AppCompatActivity {
             public void onImage(CameraKitImage cameraKitImage) {
                 Bitmap bitmap = cameraKitImage.getBitmap();
                 bitmap = Bitmap.createScaledBitmap(bitmap, cameraView.getWidth(), cameraView.getHeight(), false);
-                cameraView.stop();
+
 
                 recognizeText(bitmap);
 
