@@ -30,6 +30,7 @@ import com.wonderkiln.camerakit.CameraKitVideo;
 import com.wonderkiln.camerakit.CameraView;
 
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
 
 import dmax.dialog.SpotsDialog;
@@ -142,24 +143,41 @@ public class Camera_class extends AppCompatActivity {
             return;
         }
         graphicOverlay.clear();
+        HashMap<String, List<FirebaseVisionText.Element>> map = new HashMap<>();
 
 
         for (int i = 0; i < blocks.size(); i++) {
             List<FirebaseVisionText.Line> lines = blocks.get(i).getLines();
 
             for (int j = 0; j < lines.size(); j++) {
-                List<FirebaseVisionText.Element> elements = lines.get(j).getElements();
+                String name = lines.get(j).getElements().get(0).toString().toLowerCase();
+                map.put(name, lines.get(j).getElements());
+                TextGraphic textGraphic = new TextGraphic(graphicOverlay, lines.get(j).getElements().get(0));
+                graphicOverlay.add(textGraphic);
 
-                for (int k = 0; k < elements.size(); k++) {
-                    TextGraphic textGraphic = new TextGraphic(graphicOverlay, elements.get(k));
-                    graphicOverlay.add(textGraphic);
-                    // when click on subtotal value, store value and add to true boolean
-                    // when click on tax value, store value, then start main activity and populate subtotal in textview
-
-                }
+//                for (int k = 0; k < elements.size(); k++) {
+//                    TextGraphic textGraphic = new TextGraphic(graphicOverlay, elements.get(k));
+//                    graphicOverlay.add(textGraphic);
+//                    // when click on subtotal value, store value and add to true boolean
+//                    // when click on tax value, store value, then start main activity and populate subtotal in textview
+//                    String blah = elements.get(k).getText();
+//                    String[] array = new String[elements.size()];
+//                    array[k] = blah;
+//                }
             }
         }
         waitingDialog.dismiss();
+
+        String subtotal = map.get("subtotal").get(map.get("subtotal").size() - 1).toString();
+        String tax = map.get("tax").get(map.get("tax").size() - 1).toString();
+
+        double s = Double.parseDouble(subtotal);
+        double t = Double.parseDouble(tax);
+        Intent blah = new Intent(Camera_class.this, MainActivity.class);
+        blah.putExtra("subtotal", s);
+        blah.putExtra("tax", t);
+        finish();
+        startActivity(blah);
 
     }
 }

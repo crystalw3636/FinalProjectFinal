@@ -19,14 +19,19 @@ public class MainActivity extends AppCompatActivity {
     TextView textView11;
     TextView textView12;
     TextView textView13;
-    Double subtotal;
-    Double tax;
-    Double grandTotal;
+    TextView subtotal1;
+    double subtotal;
+    double tax;
+    double grandTotal;
+    double tipAmount;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        getIntent();
+        subtotal = getIntent().getDoubleExtra("subtotal", 0);
+        tax = getIntent().getDoubleExtra("tax", 0);
         Button custom = (Button)findViewById(R.id.button7);
         custom.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -34,55 +39,47 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(new Intent(MainActivity.this, CustomPercent.class));
             }
         });
+        String subtotalPopulate = Double.toString(subtotal);
 
+        subtotal1.setText(subtotalPopulate);
         fifteenPercent = (Button) findViewById(R.id.button);
         eighteenPercent = (Button) findViewById(R.id.percent_18);
         twentyPercent = (Button) findViewById(R.id.percent_20);
-        editText = (EditText) findViewById(R.id.editText5);
         textView15 = (TextView) findViewById(R.id.textView15);
         textView11 = (TextView) findViewById(R.id.textView11);
         textView12 = (TextView) findViewById(R.id.textView12);
         textView13 = (TextView) findViewById(R.id.textView13);
-        editText.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                calculate15P();
-                calculate18P();
-                calculate20P();
-            }
-        });
+
+
+    }
+    public void OnClick(View view) {
+        tipAmount = Double.parseDouble(editText.getText().toString());
+        if (view.getId() == fifteenPercent.getId()){
+            tipAmount = subtotal * .15;
+            tipAmount = Math.round(tipAmount * 100.0) / 100.0;
+            textView11.setText("$" + tipAmount);
+            grandTotal = subtotal + tax + tipAmount;
+            textView15.setText("$" + grandTotal);
+        }
+
+        if (view.getId() == eighteenPercent.getId()){
+            tipAmount = subtotal * .18;
+            tipAmount = Math.round(tipAmount * 100.0) / 100.0;
+            textView12.setText("$" + tipAmount);
+            grandTotal = subtotal + tax + tipAmount;
+            textView15.setText("$" + grandTotal);
+        }
+
+        if (view.getId() == twentyPercent.getId()){
+            tipAmount = subtotal * .2;
+            tipAmount = Math.round(tipAmount * 100.0) / 100.0;
+            textView13.setText("$" + tipAmount);
+            grandTotal = subtotal + tax + tipAmount;
+            textView15.setText("$" + grandTotal);
+        }
+
+
     }
 
-    public void calculate15P() {
-        if (!(editText.getText().toString().equals(""))) {
-            double fifteenP = Double.parseDouble(editText.getText().toString());
-            double fifteenTip = fifteenP * 0.15;
-            String fifteen = String.format("%.02f", fifteenTip);
-            textView11.setText(fifteen);
-        } else {
-            return;
-        }
-    }
-
-    public void calculate18P() {
-        if (!(editText.getText().toString().equals(""))) {
-            double fifteenP = Double.parseDouble(editText.getText().toString());
-            double fifteenTip = fifteenP * 0.18;
-            String fifteen = String.format("%.02f", fifteenTip);
-            textView12.setText(fifteen);
-        } else {
-            return;
-        }
-    }
-    public void calculate20P() {
-        if (!(editText.getText().toString().equals(""))) {
-            double fifteenP = Double.parseDouble(editText.getText().toString());
-            double fifteenTip = fifteenP * 0.2;
-            String fifteen = String.format("%.02f", fifteenTip);
-            textView13.setText(fifteen);
-        } else {
-            return;
-        }
-    }
 
 }
