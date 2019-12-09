@@ -153,14 +153,13 @@ public class Camera_class extends AppCompatActivity {
                 for (int k = 0; k < elements.size(); k++) {
                     TextGraphic textGraphic = new TextGraphic(graphicOverlay, elements.get(k));
                     graphicOverlay.add(textGraphic);
-
+                    // when click on subtotal value, store value and add to true boolean
+                    // when click on tax value, store value, then start main activity and populate subtotal in textview
 
                 }
             }
         }
         waitingDialog.dismiss();
-
-        startActivity(new Intent(Camera_class.this, MainActivity.class));
 
     }
 }
