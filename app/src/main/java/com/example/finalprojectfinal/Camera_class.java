@@ -1,5 +1,6 @@
 package com.example.finalprojectfinal;
 
+import android.app.AlertDialog;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.os.Bundle;
@@ -9,10 +10,10 @@ import android.widget.Button;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
-import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.finalprojectfinal.Helper.GraphicOverlay;
+import com.example.finalprojectfinal.Helper.TextGraphic;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.ml.vision.FirebaseVision;
@@ -31,11 +32,15 @@ import com.wonderkiln.camerakit.CameraView;
 import java.util.Arrays;
 import java.util.List;
 
+import dmax.dialog.SpotsDialog;
 
 
 public class Camera_class extends AppCompatActivity {
 
     CameraView cameraView;
+    GraphicOverlay graphicOverlay;
+    AlertDialog waitingDialog;
+    Button btnCapture;
 
     @Override
     protected void onResume() {
@@ -53,15 +58,22 @@ public class Camera_class extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.camera_class);
 
+        waitingDialog = new SpotsDialog.Builder()
+                .setCancelable(false)
+                .setMessage("Please wait")
+                .setContext(this)
+                .build();
+
 
         cameraView = (CameraView) findViewById(R.id.camera_view);
-        Button btn_capture = (Button) findViewById(R.id.btn_capture);
-        btn_capture.setOnClickListener(new View.OnClickListener() {
+        graphicOverlay = (GraphicOverlay) findViewById(R.id.graphic_overlay);
+        btnCapture = (Button) findViewById(R.id.btn_capture);
+        btnCapture.setOnClickListener(new View.OnClickListener() {
            @Override
            public void onClick(View view) {
                cameraView.start();
                cameraView.captureImage();
-               startActivity(new Intent(Camera_class.this, MainActivity.class));
+               graphicOverlay.clear();
            }
         });
 
@@ -78,8 +90,12 @@ public class Camera_class extends AppCompatActivity {
 
             @Override
             public void onImage(CameraKitImage cameraKitImage) {
+
+                waitingDialog.show();
                 Bitmap bitmap = cameraKitImage.getBitmap();
                 bitmap = Bitmap.createScaledBitmap(bitmap, cameraView.getWidth(), cameraView.getHeight(), false);
+
+                cameraView.stop();
 
 
                 recognizeText(bitmap);
@@ -91,6 +107,8 @@ public class Camera_class extends AppCompatActivity {
 
             }
         });
+
+
     }
 
     private void recognizeText(Bitmap bitmap) {
@@ -123,6 +141,7 @@ public class Camera_class extends AppCompatActivity {
             Toast.makeText(this, "No Text Found", Toast.LENGTH_SHORT).show();
             return;
         }
+        graphicOverlay.clear();
 
 
         for (int i = 0; i < blocks.size(); i++) {
@@ -132,10 +151,16 @@ public class Camera_class extends AppCompatActivity {
                 List<FirebaseVisionText.Element> elements = lines.get(j).getElements();
 
                 for (int k = 0; k < elements.size(); k++) {
+                    TextGraphic textGraphic = new TextGraphic(graphicOverlay, elements.get(k));
+                    graphicOverlay.add(textGraphic);
 
 
                 }
             }
         }
+        waitingDialog.dismiss();
+
+        startActivity(new Intent(Camera_class.this, MainActivity.class));
+
     }
 }
