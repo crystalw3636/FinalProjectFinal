@@ -61,6 +61,7 @@ public class Camera_class extends AppCompatActivity {
            public void onClick(View view) {
                cameraView.start();
                cameraView.captureImage();
+               startActivity(new Intent(Camera_class.this, MainActivity.class));
            }
         });
 
