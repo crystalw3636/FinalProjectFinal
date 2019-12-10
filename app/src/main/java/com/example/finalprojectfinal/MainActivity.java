@@ -50,34 +50,35 @@ public class MainActivity extends AppCompatActivity {
         textView13 = (TextView) findViewById(R.id.textView13);
         subtotal1 = (TextView)  findViewById(R.id.subtotal1);
         subtotal1.setText(subtotalPopulate);
-
-
-    }
-    public void OnClick(View view) {
-
-        if (view.getId() == fifteenPercent.getId()){
-            tipAmount = subtotal * .15;
-            textView11.setText("$" + tipAmount);
-            grandTotal = subtotal + tax + tipAmount;
-            textView15.setText("$" + grandTotal);
+        if (subtotal1.getText() != null) {
+            calculate15P();
+            calculate18P();
+            calculate20P();
         }
-
-        if (view.getId() == eighteenPercent.getId()){
-            tipAmount = subtotal * .18;
-            textView12.setText("$" + tipAmount);
-            grandTotal = subtotal + tax + tipAmount;
-            textView15.setText("$" + grandTotal);
-        }
-
-        if (view.getId() == twentyPercent.getId()){
-            tipAmount = subtotal * .2;
-            textView13.setText("$" + tipAmount);
-            grandTotal = subtotal + tax + tipAmount;
-            textView15.setText("$" + grandTotal);
-        }
-
-
     }
 
+    public void calculate15P() {
+        String fifteen = subtotal1.getText().toString();
+        double fifteenD = Double.parseDouble(fifteen);
+        double fifteenTip = fifteenD * 0.15;
+        String fifteenTwoDec = String.format("%.2f", fifteenTip);
+        textView11.setText(fifteenTwoDec);
+    }
+
+    public void calculate18P() {
+        String eighteen = subtotal1.getText().toString();
+        double eighteenD = Double.parseDouble(eighteen);
+        double eighteenTip = eighteenD * 0.18;
+        String eighteenTwoDec = String.format("%.2f", eighteenTip);
+        textView12.setText(eighteenTwoDec);
+    }
+
+    public void calculate20P() {
+        String twenty = subtotal1.getText().toString();
+        double twentyD = Double.parseDouble(twenty);
+        double twentyTip = twentyD* 0.20;
+        String twentyTwoDec = String.format("%.2f", twentyTip);
+        textView13.setText(twentyTwoDec);
+    }
 
 }
