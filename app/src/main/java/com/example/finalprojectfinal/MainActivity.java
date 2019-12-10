@@ -39,9 +39,8 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(new Intent(MainActivity.this, CustomPercent.class));
             }
         });
-        String subtotalPopulate = Double.toString(subtotal);
+        String subtotalPopulate = String.valueOf(subtotal);
 
-        subtotal1.setText(subtotalPopulate);
         fifteenPercent = (Button) findViewById(R.id.button);
         eighteenPercent = (Button) findViewById(R.id.percent_18);
         twentyPercent = (Button) findViewById(R.id.percent_20);
@@ -49,14 +48,15 @@ public class MainActivity extends AppCompatActivity {
         textView11 = (TextView) findViewById(R.id.textView11);
         textView12 = (TextView) findViewById(R.id.textView12);
         textView13 = (TextView) findViewById(R.id.textView13);
+        subtotal1 = (TextView)  findViewById(R.id.subtotal1);
+        subtotal1.setText(subtotalPopulate);
 
 
     }
     public void OnClick(View view) {
-        tipAmount = Double.parseDouble(editText.getText().toString());
+
         if (view.getId() == fifteenPercent.getId()){
             tipAmount = subtotal * .15;
-            tipAmount = Math.round(tipAmount * 100.0) / 100.0;
             textView11.setText("$" + tipAmount);
             grandTotal = subtotal + tax + tipAmount;
             textView15.setText("$" + grandTotal);
@@ -64,7 +64,6 @@ public class MainActivity extends AppCompatActivity {
 
         if (view.getId() == eighteenPercent.getId()){
             tipAmount = subtotal * .18;
-            tipAmount = Math.round(tipAmount * 100.0) / 100.0;
             textView12.setText("$" + tipAmount);
             grandTotal = subtotal + tax + tipAmount;
             textView15.setText("$" + grandTotal);
@@ -72,7 +71,6 @@ public class MainActivity extends AppCompatActivity {
 
         if (view.getId() == twentyPercent.getId()){
             tipAmount = subtotal * .2;
-            tipAmount = Math.round(tipAmount * 100.0) / 100.0;
             textView13.setText("$" + tipAmount);
             grandTotal = subtotal + tax + tipAmount;
             textView15.setText("$" + grandTotal);

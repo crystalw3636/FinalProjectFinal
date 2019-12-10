@@ -150,27 +150,22 @@ public class Camera_class extends AppCompatActivity {
             List<FirebaseVisionText.Line> lines = blocks.get(i).getLines();
 
             for (int j = 0; j < lines.size(); j++) {
-                String name = lines.get(j).getElements().get(0).toString().toLowerCase();
-                map.put(name, lines.get(j).getElements());
-                TextGraphic textGraphic = new TextGraphic(graphicOverlay, lines.get(j).getElements().get(0));
-                graphicOverlay.add(textGraphic);
+                List<FirebaseVisionText.Element> elements = lines.get(j).getElements();
 
-//                for (int k = 0; k < elements.size(); k++) {
-//                    TextGraphic textGraphic = new TextGraphic(graphicOverlay, elements.get(k));
-//                    graphicOverlay.add(textGraphic);
-//                    // when click on subtotal value, store value and add to true boolean
-//                    // when click on tax value, store value, then start main activity and populate subtotal in textview
-//                    String blah = elements.get(k).getText();
-//                    String[] array = new String[elements.size()];
-//                    array[k] = blah;
-//                }
+                String name = lines.get(j).getElements().get(0).getText().toLowerCase();
+                map.put(name, lines.get(j).getElements());
+
+
+                for (int k = 0; k < elements.size(); k++) {
+                    TextGraphic textGraphic = new TextGraphic(graphicOverlay, elements.get(k));
+                    graphicOverlay.add(textGraphic);
+                }
+
             }
         }
         waitingDialog.dismiss();
-
-        String subtotal = map.get("subtotal").get(map.get("subtotal").size() - 1).toString();
-        String tax = map.get("tax").get(map.get("tax").size() - 1).toString();
-
+        String subtotal = map.get("subtotal").get(map.get("subtotal").size() - 1).getText();
+        String tax = map.get("tax").get(map.get("tax").size() - 1).getText();
         double s = Double.parseDouble(subtotal);
         double t = Double.parseDouble(tax);
         Intent blah = new Intent(Camera_class.this, MainActivity.class);
@@ -178,6 +173,7 @@ public class Camera_class extends AppCompatActivity {
         blah.putExtra("tax", t);
         finish();
         startActivity(blah);
+
 
     }
 }
