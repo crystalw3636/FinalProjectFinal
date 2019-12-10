@@ -34,13 +34,6 @@ public class MainActivity extends AppCompatActivity {
         getIntent();
         subtotal = getIntent().getDoubleExtra("subtotal", 0);
         tax = getIntent().getDoubleExtra("tax", 0);
-        Button custom = (Button)findViewById(R.id.button7);
-        custom.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startActivity(new Intent(MainActivity.this, CustomPercent.class));
-            }
-        });
         String subtotalPopulate = String.valueOf(subtotal);
 
         fifteenPercent = (Button) findViewById(R.id.button);
@@ -67,7 +60,7 @@ public class MainActivity extends AppCompatActivity {
         String fifteenTwoDec = String.format("%.2f", fifteenTip);
         textView11.setText(fifteenTwoDec);
         grandTotal15 = fifteenD + fifteenTip + tax;
-        final String grandTotal15TwoDec = String.format("%2f", grandTotal15);
+        final String grandTotal15TwoDec = String.format("%.2f", grandTotal15);
         fifteenPercent.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -83,7 +76,7 @@ public class MainActivity extends AppCompatActivity {
         String eighteenTwoDec = String.format("%.2f", eighteenTip);
         textView12.setText(eighteenTwoDec);
         grandTotal18 = eighteenD + eighteenTip + tax;
-        final String grandTotal18TwoDec = String.format("%2f", grandTotal18);
+        final String grandTotal18TwoDec = String.format("%.2f", grandTotal18);
         eighteenPercent.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -99,7 +92,7 @@ public class MainActivity extends AppCompatActivity {
         String twentyTwoDec = String.format("%.2f", twentyTip);
         textView13.setText(twentyTwoDec);
         grandTotal20 = twentyD + twentyTip + tax;
-        final String grandTotal20TwoDec = String.format("%2f", grandTotal20);
+        final String grandTotal20TwoDec = String.format("%.2f", grandTotal20);
         twentyPercent.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

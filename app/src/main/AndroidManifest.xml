@@ -12,7 +12,6 @@
             android:name="com.google.firebase.ml.vision.DEPENDENCIES"
             android:value="ocr"/>
         <activity android:name=".MainActivity"></activity>
-        <activity android:name=".CustomPercent"></activity>
         <activity android:name=".Camera_class"></activity>
         <activity android:name=".Intro">
             <intent-filter>
