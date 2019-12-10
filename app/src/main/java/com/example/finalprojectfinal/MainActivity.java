@@ -22,7 +22,9 @@ public class MainActivity extends AppCompatActivity {
     TextView subtotal1;
     double subtotal;
     double tax;
-    double grandTotal;
+    double grandTotal15;
+    double grandTotal18;
+    double grandTotal20;
     double tipAmount;
 
     @Override
@@ -57,12 +59,21 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
+
     public void calculate15P() {
         String fifteen = subtotal1.getText().toString();
         double fifteenD = Double.parseDouble(fifteen);
         double fifteenTip = fifteenD * 0.15;
         String fifteenTwoDec = String.format("%.2f", fifteenTip);
         textView11.setText(fifteenTwoDec);
+        grandTotal15 = fifteenD + fifteenTip + tax;
+        final String grandTotal15TwoDec = String.format("%2f", grandTotal15);
+        fifteenPercent.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                textView15.setText(grandTotal15TwoDec);
+            }
+        });
     }
 
     public void calculate18P() {
@@ -71,6 +82,14 @@ public class MainActivity extends AppCompatActivity {
         double eighteenTip = eighteenD * 0.18;
         String eighteenTwoDec = String.format("%.2f", eighteenTip);
         textView12.setText(eighteenTwoDec);
+        grandTotal18 = eighteenD + eighteenTip + tax;
+        final String grandTotal18TwoDec = String.format("%2f", grandTotal18);
+        eighteenPercent.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                textView15.setText(grandTotal18TwoDec);
+            }
+        });
     }
 
     public void calculate20P() {
@@ -79,6 +98,14 @@ public class MainActivity extends AppCompatActivity {
         double twentyTip = twentyD* 0.20;
         String twentyTwoDec = String.format("%.2f", twentyTip);
         textView13.setText(twentyTwoDec);
+        grandTotal20 = twentyD + twentyTip + tax;
+        final String grandTotal20TwoDec = String.format("%2f", grandTotal20);
+        twentyPercent.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                textView15.setText(grandTotal20TwoDec);
+            }
+        });
     }
 
 }
